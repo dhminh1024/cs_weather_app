@@ -2,10 +2,12 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 const WeatherInfo = ({ weather }) => {
-  const temperatureC = weather ? (weather.main.temp - 273.15).toFixed(2) : "";
-  const temperatureF = weather
-    ? (((weather.main.temp - 273.15) * 9) / 5 + 32).toFixed(2)
-    : "";
+  const temperatureC =
+    weather && weather.main ? (weather.main.temp - 273.15).toFixed(2) : "";
+  const temperatureF =
+    weather && weather.main
+      ? (((weather.main.temp - 273.15) * 9) / 5 + 32).toFixed(2)
+      : "";
   return (
     <Card className="bg-dark text-white main-content">
       {/* <Card.Img src="holder.js/100px270" alt="Card image" /> */}

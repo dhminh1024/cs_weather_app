@@ -21,6 +21,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [apiError, setAPIError] = useState("");
   const url = getURL(geoLocation.latitude, geoLocation.longitude);
 
   function getURL(latitude, longitude) {
@@ -62,6 +63,7 @@ const App = () => {
         setWeather(data);
       } catch (err) {
         console.log(err);
+        setAPIError(err.message);
       }
       setLoading(false);
     };
@@ -93,8 +95,10 @@ const App = () => {
               <div className="w-100 vh-100 d-flex justify-content-center align-items-center">
                 <ClipLoader color="#f86c6b" size={150} loading={true} />
               </div>
-            ) : (
+            ) : !apiError ? (
               <WeatherInfo weather={weather} />
+            ) : (
+              apiError
             )}
 
             {/* <br /><br /><br />
